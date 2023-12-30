@@ -1,7 +1,16 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getPopularPost } from "./feature/popular/popularSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPopularPost());
+  });
+
   return (
     <>
       <Grid
