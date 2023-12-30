@@ -1,16 +1,8 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getPopularPost } from "./feature/popular/popularSlice";
+import PostGrid from "./components/PostGrid";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPopularPost());
-  });
-
   return (
     <>
       <Grid
@@ -28,7 +20,7 @@ function App() {
           </GridItem>
         </Show>
         <GridItem bg="green.300" area={"main"}>
-          Main
+          <PostGrid />
         </GridItem>
         <GridItem bg="blue.300" area={"footer"}>
           Footer
