@@ -16,7 +16,7 @@ function PostGrid() {
   }, []);
 
   return (
-    <SimpleGrid gap={2} justifyContent="center">
+    <SimpleGrid gap={2} justifyContent="center" mx={2}>
       {postData &&
         postData.map((element) => (
           <Post key={element.data.id} data={element.data} />
