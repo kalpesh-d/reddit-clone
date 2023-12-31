@@ -4,7 +4,6 @@ import getAll from "../../services/api-client";
 const initialState = {
   isLoading: false,
   popularPosts: [],
-  subredditInfos: [],
 };
 
 export const getPopularPosts = createAsyncThunk(
@@ -19,42 +18,33 @@ export const getPopularPosts = createAsyncThunk(
   }
 );
 
-export const getSubredditInfos = createAsyncThunk(
-  "popular/getSubredditInfos",
-  async (enpoint) => {
-    try {
-      const resp = await getAll(`${enpoint}/about.json`);
-      return resp;
-    } catch (err) {
-      console.log(err);
-    }
-  }
-);
-
 const popularSlice = createSlice({
   name: "popular",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // getPopularPosts
       .addCase(getPopularPosts.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(getPopularPosts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.popularPosts = action.payload;
+        const cachedPopularPosts = sessionStorage.getItem("popularPosts");
+        console.log(cachedPopularPosts);
+
+        if (cachedPopularPosts) {
+          // Use the cached data if available
+          state.popularPosts = JSON.parse(cachedPopularPosts);
+        } else {
+          // Save the popularPosts data to sessionStorage
+          const popularPosts = action.payload;
+          sessionStorage.setItem("popularPosts", JSON.stringify(popularPosts));
+
+          state.popularPosts = popularPosts;
+        }
       })
       .addCase(getPopularPosts.rejected, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(getSubredditInfos.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getSubredditInfos.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.subredditInfos = action.payload;
-      })
-      .addCase(getSubredditInfos.rejected, (state) => {
         state.isLoading = false;
       });
   },
