@@ -31,7 +31,6 @@ const popularSlice = createSlice({
       .addCase(getPopularPosts.fulfilled, (state, action) => {
         state.isLoading = false;
         const cachedPopularPosts = sessionStorage.getItem("popularPosts");
-        console.log(cachedPopularPosts);
 
         if (cachedPopularPosts) {
           // Use the cached data if available
