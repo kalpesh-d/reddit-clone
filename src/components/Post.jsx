@@ -1,6 +1,7 @@
 import { formatNumber } from "../utils/formatNumber";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Card,
   CardBody,
   CardHeader,
@@ -11,17 +12,18 @@ import {
 } from "@chakra-ui/react";
 
 import { useState } from "react";
+import MediaPost from "./mediaPost";
 
 function Post({ data }) {
   const [upvote, setUpvote] = useState(false);
   const [downvote, setDownvote] = useState(false);
 
-  const thumbnailCondition =
-    (data.thumbnail !== "default" &&
-      data.thumbnail !== "self" &&
-      data.thumbnail !== "nsfw" &&
-      data.secure_media === null) ??
-    data.thumbnail;
+  // const thumbnailCondition =
+  //   (data.thumbnail !== "default" &&
+  //     data.thumbnail !== "self" &&
+  //     data.thumbnail !== "nsfw" &&
+  //     data.secure_media === null) ??
+  //   data.thumbnail;
 
   const handleUpvote = () => {
     setUpvote(!upvote);
@@ -36,7 +38,7 @@ function Post({ data }) {
   return (
     <Card
       maxW="2xl"
-      // maxH="3xs"
+      maxH="auto"
       border="1px"
       borderColor="gray.600"
       _hover={{
@@ -50,7 +52,7 @@ function Post({ data }) {
         alignItems="flex-start"
         justifyContent="flex-end"
       >
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" w="100%">
           <CardHeader py={3} px={1}>
             <Heading as="h1" fontSize="0.9rem">
               {data.subreddit_name_prefixed}{" "}
@@ -59,21 +61,17 @@ function Post({ data }) {
               </Text>
             </Heading>
           </CardHeader>
-          <CardBody pt={0} px={1}>
-            <Flex flex="1" gap="4" justifyContent="space-between">
+          <Flex flex="1" gap="4" justifyContent="space-between">
+            <CardBody pt={0} px={1}>
               <Heading as="h1" size="sm" fontWeight="medium">
                 {data.title}
               </Heading>
-              {thumbnailCondition && (
-                <Image
-                  src={data.thumbnail}
-                  borderRadius={10}
-                  h={`${data.thumbnail_height}px`}
-                  w={`${data.thumbnail_width}px`}
-                />
-              )}
-            </Flex>
-          </CardBody>
+              <Box maxH="512px" w="100%">
+                {/* {thumbnailCondition && ()} */}
+                <MediaPost data={data} />
+              </Box>
+            </CardBody>
+          </Flex>
         </Flex>
         <Flex flexDirection="column" alignItems="center" p="0.8rem">
           <TriangleUpIcon
