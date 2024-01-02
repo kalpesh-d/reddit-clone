@@ -62,14 +62,26 @@ function Post({ data }) {
             </Heading>
           </CardHeader>
           <Flex flex="1" gap="4" justifyContent="space-between">
-            <CardBody pt={0} px={1}>
+            <CardBody padding="0 0 0.5rem 0">
               <Heading as="h1" size="sm" fontWeight="medium">
                 {data.title}
               </Heading>
-              <Box maxH="512px" w="100%">
-                {/* {thumbnailCondition && ()} */}
-                <MediaPost data={data} />
-              </Box>
+              {data.post_hint !== "link" ? (
+                <Box padding="0.6rem 0 0 0">
+                  <Flex
+                    maxH="512px"
+                    w="100%"
+                    bg="whiteAlpha.100"
+                    justifyContent="center"
+                  >
+                    <MediaPost data={data} />
+                  </Flex>
+                </Box>
+              ) : (
+                <Box maxH="512px" w="100%">
+                  <MediaPost data={data} />
+                </Box>
+              )}
             </CardBody>
           </Flex>
         </Flex>

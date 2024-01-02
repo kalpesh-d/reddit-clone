@@ -7,15 +7,7 @@ function MediaPost({ data }) {
   //   console.log(data.url);
   // }
   if (data.post_hint === "image") {
-    return (
-      <Image
-        src={data.url}
-        objectFit="cover"
-        padding="0.5rem 1rem 0px 0px"
-        maxH="inherit"
-        w="inherit"
-      />
-    );
+    return <Image src={data.url} maxH="inherit" objectFit="cover" />;
   } else if (data.post_hint === "link") {
     return (
       <Link href={data.url} isExternal fontSize="0.8rem" color="blue.400">
