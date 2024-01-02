@@ -1,12 +1,20 @@
 import { formatNumber } from "../utils/formatNumber";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import {
+  ChatIcon,
+  LinkIcon,
+  TriangleDownIcon,
+  TriangleUpIcon,
+} from "@chakra-ui/icons";
 import {
   Box,
   Card,
   CardBody,
+  CardFooter,
   CardHeader,
   Flex,
+  HStack,
   Heading,
+  Link,
   Text,
 } from "@chakra-ui/react";
 
@@ -16,13 +24,7 @@ import MediaPost from "./mediaPost";
 function Post({ data }) {
   const [upvote, setUpvote] = useState(false);
   const [downvote, setDownvote] = useState(false);
-
-  // const thumbnailCondition =
-  //   (data.thumbnail !== "default" &&
-  //     data.thumbnail !== "self" &&
-  //     data.thumbnail !== "nsfw" &&
-  //     data.secure_media === null) ??
-  //   data.thumbnail;
+  const [copyLink, setCopyLink] = useState(false);
 
   const handleUpvote = () => {
     setUpvote(!upvote);
@@ -32,6 +34,11 @@ function Post({ data }) {
   const handleDownvote = () => {
     setDownvote(!downvote);
     setUpvote(false); // Reset upvote state
+  };
+
+  const handleShareClick = () => {
+    navigator.clipboard.writeText(`https://www.reddit.com${data.permalink}`);
+    setCopyLink(true);
   };
 
   return (
@@ -83,6 +90,29 @@ function Post({ data }) {
               )}
             </CardBody>
           </Flex>
+          <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">
+            <Flex alignItems="center" gap={3}>
+              <HStack>
+                <ChatIcon />
+                <Text fontWeight="bold" fontSize="0.8rem">
+                  {data.num_comments > 1000
+                    ? formatNumber(data.num_comments)
+                    : data.num_comments}{" "}
+                  Comments
+                </Text>
+              </HStack>
+              <Link
+                display="flex"
+                alignItems="center"
+                onClick={handleShareClick}
+              >
+                <LinkIcon mr={1} />
+                <Text fontWeight="bold" fontSize="0.8rem">
+                  {copyLink ? "Copied" : "Share"}
+                </Text>
+              </Link>
+            </Flex>
+          </CardFooter>
         </Flex>
         <Flex flexDirection="column" alignItems="center" p="0.8rem">
           <TriangleUpIcon
