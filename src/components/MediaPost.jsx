@@ -1,4 +1,4 @@
-import { AspectRatio, Image, Link } from "@chakra-ui/react";
+import { Image, Link } from "@chakra-ui/react";
 import { shortenLink } from "../utils/shortenLink";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
@@ -17,16 +17,14 @@ function MediaPost({ data }) {
   } else if (data.post_hint === "hosted:video") {
     console.log(data);
     return (
-      <AspectRatio objectFit="cover">
-        <video
-          controls
-          type="video/mp4"
-          height={data.secure_media.reddit_video.height}
-          width={data.secure_media.reddit_video.width}
-        >
-          <source src={data.secure_media.reddit_video.fallback_url} />
-        </video>
-      </AspectRatio>
+      <video
+        controls
+        type="video/mp4"
+        height={data.secure_media.reddit_video.height}
+        width="100%"
+      >
+        <source src={data.secure_media.reddit_video.fallback_url} />
+      </video>
     );
   }
 }

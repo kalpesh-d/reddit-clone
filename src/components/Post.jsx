@@ -7,7 +7,6 @@ import {
   CardHeader,
   Flex,
   Heading,
-  Image,
   Text,
 } from "@chakra-ui/react";
 
