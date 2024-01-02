@@ -1,11 +1,10 @@
 import { Image, Link } from "@chakra-ui/react";
 import { shortenLink } from "../utils/shortenLink";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
+import React from "react";
+import ReactPlayer from "react-player";
 
 function MediaPost({ data }) {
-  // if (data.post_hint === undefined) {
-  //   console.log(data.url);
-  // }
   if (data.post_hint === "image") {
     return <Image src={data.url} maxH="inherit" objectFit="cover" />;
   } else if (data.post_hint === "link") {
@@ -17,14 +16,21 @@ function MediaPost({ data }) {
   } else if (data.post_hint === "hosted:video") {
     console.log(data);
     return (
-      <video
-        controls
-        type="video/mp4"
-        height={data.secure_media.reddit_video.height}
-        width="100%"
-      >
-        <source src={data.secure_media.reddit_video.fallback_url} />
-      </video>
+      <>
+        <ReactPlayer
+          url={data.secure_media.reddit_video.hls_url}
+          width="100%"
+          controls={true}
+        />
+      </>
+      // <video
+      //   controls
+      //   type="video/mp4"
+      //   height={data.secure_media.reddit_video.height}
+      //   width="100%"
+      // >
+      //   <source src={data.secure_media.reddit_video.fallback_url} />
+      // </video>
     );
   }
 }
