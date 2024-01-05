@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import popularReducer from "./feature/popular/popularSlice";
+import bestReducer from "./feature/best/bestSlice";
 
 const store = configureStore({
   reducer: {
-    popular: popularReducer,
+    best: bestReducer,
   },
 });
 
