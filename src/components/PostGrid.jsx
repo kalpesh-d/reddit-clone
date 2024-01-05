@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Post from "./Post";
 import { SimpleGrid } from "@chakra-ui/react";
 import Catergory from "./Catergory";
+import Skelton from "./Skelton.jsx";
 
 function PostGrid() {
   const selectedCategory = useSelector((state) => state.posts.selectedCategory);
@@ -16,13 +17,19 @@ function PostGrid() {
     dispatch(getPosts(`${selectedCategory}`));
   }, [selectedCategory]);
 
+  // if (!postData) return ;
+
   return (
     <SimpleGrid gap={2} justifyContent="center" mx={2}>
       <Catergory />
-      {postData &&
+
+      {!postData ? (
+        <Skelton />
+      ) : (
         postData.map((element) => (
           <Post key={element.data.id} data={element.data} />
-        ))}
+        ))
+      )}
     </SimpleGrid>
   );
 }
