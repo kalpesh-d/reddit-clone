@@ -9,33 +9,34 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPostsForCategory } from "../feature/posts/postsSlice";
+import titleCase from "../utils/titleCase";
+
+const categories = ["Best", "Hot", "New", "Top", "Rising"];
 
 function Catergory() {
   const category = useSelector((state) => state.posts.selectedCategory);
   const dispatch = useDispatch();
 
+  const handleCategoryClick = (category) => {
+    const action = category.toLowerCase();
+    dispatch(setPostsForCategory(action));
+  };
+
   return (
     <HStack spacing={5}>
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-          {category}
+          {titleCase(category)}
         </MenuButton>
         <MenuList>
-          <MenuItem onClick={() => dispatch(setPostsForCategory("best"))}>
-            Best
-          </MenuItem>
-          <MenuItem onClick={() => dispatch(setPostsForCategory("hot"))}>
-            Hot
-          </MenuItem>
-          <MenuItem onClick={() => dispatch(setPostsForCategory("new"))}>
-            New
-          </MenuItem>
-          <MenuItem onClick={() => dispatch(setPostsForCategory("top"))}>
-            Top
-          </MenuItem>
-          <MenuItem onClick={() => dispatch(setPostsForCategory("rising"))}>
-            Rising
-          </MenuItem>
+          {categories.map((category) => (
+            <MenuItem
+              key={category}
+              onClick={() => dispatch(handleCategoryClick(category))}
+            >
+              {category}
+            </MenuItem>
+          ))}
         </MenuList>
       </Menu>
     </HStack>
