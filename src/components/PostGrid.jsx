@@ -1,18 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getBestPosts } from "../feature/best/bestSlice";
+import { getPosts } from "../feature/posts/postsSlice.js";
 import { useEffect } from "react";
 import Post from "./Post";
 import { SimpleGrid } from "@chakra-ui/react";
 import Catergory from "./Catergory";
 
 function PostGrid() {
-  const postData = useSelector((state) => state.best.bestPosts?.data?.children);
-
+  const selectedCategory = useSelector((state) => state.posts.selectedCategory);
+  const postData = useSelector(
+    (state) => state.posts.postsByCategory[selectedCategory]?.data?.children
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getBestPosts());
-  }, []);
+    dispatch(getPosts(`${selectedCategory}`));
+  }, [selectedCategory]);
 
   return (
     <SimpleGrid gap={2} justifyContent="center" mx={2}>

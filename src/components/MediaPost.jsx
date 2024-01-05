@@ -14,7 +14,7 @@ function MediaPost({ data }) {
       </Link>
     );
   } else if (data.post_hint === "hosted:video") {
-    console.log(data);
+    // console.log(data);
     return (
       <>
         <ReactPlayer

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import bestReducer from "./feature/best/bestSlice";
+import postsReducer from "./feature/posts/postsSlice";
 
 const store = configureStore({
   reducer: {
-    best: bestReducer,
+    posts: postsReducer,
   },
 });
 
