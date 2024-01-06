@@ -32,7 +32,7 @@ function Catergory() {
           {categories.map((category) => (
             <MenuItem
               key={category}
-              onClick={() => dispatch(handleCategoryClick(category))}
+              onClick={() => handleCategoryClick(category)}
             >
               {category}
             </MenuItem>

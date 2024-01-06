@@ -114,7 +114,11 @@ function Post({ data }) {
             </Flex>
           </CardFooter>
         </Flex>
-        <Flex flexDirection="column" alignItems="center" p="0.8rem">
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          p={{ base: "0.5", md: "0.8rem" }}
+        >
           <TriangleUpIcon
             color={upvote ? "red.400" : "gray.400"}
             onClick={handleUpvote}

@@ -1,8 +1,14 @@
-import { Card, Flex, Skeleton, SkeletonText } from "@chakra-ui/react";
+import { Card, Skeleton, SkeletonText } from "@chakra-ui/react";
 
 function Skelton() {
   return (
-    <Card w="40rem" maxH="auto" border="1px" borderColor="gray.600" padding={5}>
+    <Card
+      w={{ base: "18rem", md: "35rem", lg: "40rem" }}
+      maxH="auto"
+      border="1px"
+      borderColor="gray.600"
+      padding={5}
+    >
       <Skeleton>
         <div>won't be visible</div>
       </Skeleton>
