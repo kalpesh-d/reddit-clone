@@ -7,13 +7,16 @@ import "./index.css";
 import theme from "./theme.js";
 import { Provider } from "react-redux";
 import store from "./store.js";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <ChakraProvider theme={theme}>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </ChakraProvider>
     </Provider>
   </React.StrictMode>
