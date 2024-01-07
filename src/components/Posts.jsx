@@ -21,7 +21,7 @@ import {
 import { useState } from "react";
 import MediaPost from "./mediaPost";
 
-function Post({ data }) {
+function Posts({ data }) {
   const [upvote, setUpvote] = useState(false);
   const [downvote, setDownvote] = useState(false);
   const [copyLink, setCopyLink] = useState(false);
@@ -140,4 +140,4 @@ function Post({ data }) {
   );
 }
 
-export default Post;
+export default Posts;

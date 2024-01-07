@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../feature/posts/postsSlice.js";
 import { useEffect } from "react";
-import Post from "./Post";
 import { SimpleGrid } from "@chakra-ui/react";
 import Catergory from "./Catergory";
 import Skelton from "./Skelton.jsx";
 import { Link } from "react-router-dom";
 import extractTitle from "../utils/extractTitle.js";
+import Posts from "./Posts.jsx";
 
 function PostGrid() {
   const selectedCategory = useSelector((state) => state.posts.selectedCategory);
@@ -35,7 +35,7 @@ function PostGrid() {
               element.data.name
             }/${extractTitle(element.data.permalink)}`}
           >
-            <Post data={element.data} />
+            <Posts data={element.data} />
           </Link>
         ))}
     </SimpleGrid>
