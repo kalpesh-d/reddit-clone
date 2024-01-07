@@ -1,10 +1,5 @@
 import { formatNumber } from "../utils/formatNumber";
-import {
-  ChatIcon,
-  LinkIcon,
-  TriangleDownIcon,
-  TriangleUpIcon,
-} from "@chakra-ui/icons";
+import { ChatIcon, TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
   Box,
   Card,
@@ -14,7 +9,6 @@ import {
   Flex,
   HStack,
   Heading,
-  Link,
   Text,
 } from "@chakra-ui/react";
 
@@ -91,27 +85,15 @@ function Posts({ data }) {
             </CardBody>
           </Flex>
           <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">
-            <Flex alignItems="center" gap={3}>
-              <HStack>
-                <ChatIcon />
-                <Text fontWeight="bold" fontSize="0.8rem">
-                  {data.num_comments > 1000
-                    ? formatNumber(data.num_comments)
-                    : data.num_comments}{" "}
-                  Comments
-                </Text>
-              </HStack>
-              <Link
-                display="flex"
-                alignItems="center"
-                onClick={handleShareClick}
-              >
-                <LinkIcon mr={1} />
-                <Text fontWeight="bold" fontSize="0.8rem">
-                  {copyLink ? "Copied" : "Share"}
-                </Text>
-              </Link>
-            </Flex>
+            <HStack>
+              <ChatIcon />
+              <Text fontWeight="bold" fontSize="0.8rem">
+                {data.num_comments > 1000
+                  ? formatNumber(data.num_comments)
+                  : data.num_comments}{" "}
+                Comments
+              </Text>
+            </HStack>
           </CardFooter>
         </Flex>
         <Flex

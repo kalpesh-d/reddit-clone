@@ -1,13 +1,16 @@
-import { useParams } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import CurrentPost from "../components/CurrentPost";
+import { useLocation } from "react-router-dom";
 
 function PostPage() {
-  const { permalink } = useParams();
+  const location = useLocation();
+  const permalink = location.pathname;
 
   return (
-    <div>
-      <h2>Post Page</h2>
-      <p>Permalink: {permalink}</p>
-    </div>
+    <>
+      <Navbar />
+      <CurrentPost permalink={permalink} />
+    </>
   );
 }
 

@@ -15,8 +15,8 @@ const initialState = {
 
 export const getPosts = createAsyncThunk("posts/getPosts", async (category) => {
   try {
-    console.log(`${category}.json`);
-    const resp = await getAll(`${category}.json`);
+    // console.log(`${category}.json`);
+    const resp = await getAll(`/${category}.json`);
     return resp;
   } catch (err) {
     console.log(err);

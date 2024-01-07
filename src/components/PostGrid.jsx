@@ -31,6 +31,7 @@ function PostGrid() {
         postData.map((element) => (
           <Link
             key={element.data.id}
+            state={{ permalink: element.data.permalink }}
             to={`/r/${element.data.subreddit}/comments/${
               element.data.name
             }/${extractTitle(element.data.permalink)}`}
