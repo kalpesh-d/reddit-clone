@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import { SimpleGrid } from "@chakra-ui/react";
 import Catergory from "./Catergory";
 import Skelton from "./Skelton.jsx";
-import { Link } from "react-router-dom";
-import extractTitle from "../utils/extractTitle.js";
 import Posts from "./Posts.jsx";
 
 function PostGrid() {
@@ -29,15 +27,7 @@ function PostGrid() {
       {isLoading && skeletons.map((skelton) => <Skelton key={skelton} />)}
       {postData &&
         postData.map((element) => (
-          <Link
-            key={element.data.id}
-            state={{ permalink: element.data.permalink }}
-            to={`/r/${element.data.subreddit}/comments/${
-              element.data.name
-            }/${extractTitle(element.data.permalink)}`}
-          >
-            <Posts data={element.data} />
-          </Link>
+          <Posts data={element.data} key={element.data.id} />
         ))}
     </SimpleGrid>
   );

@@ -14,7 +14,6 @@ function MediaPost({ data }) {
       </Link>
     );
   } else if (data.post_hint === "hosted:video") {
-    // console.log(data);
     return (
       <>
         <ReactPlayer
@@ -23,14 +22,6 @@ function MediaPost({ data }) {
           controls={true}
         />
       </>
-      // <video
-      //   controls
-      //   type="video/mp4"
-      //   height={data.secure_media.reddit_video.height}
-      //   width="100%"
-      // >
-      //   <source src={data.secure_media.reddit_video.fallback_url} />
-      // </video>
     );
   }
 }

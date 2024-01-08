@@ -1,5 +1,10 @@
 import { formatNumber } from "../utils/formatNumber";
-import { ChatIcon, TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import {
+  ChatIcon,
+  LinkIcon,
+  TriangleDownIcon,
+  TriangleUpIcon,
+} from "@chakra-ui/icons";
 import {
   Box,
   Card,
@@ -10,10 +15,13 @@ import {
   HStack,
   Heading,
   Text,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
+import extractTitle from "../utils/extractTitle.js";
 
 import { useState } from "react";
-import MediaPost from "./mediaPost";
+import MediaPost from "./MediaPost";
+import { Link } from "react-router-dom";
 
 function Posts({ data }) {
   const [upvote, setUpvote] = useState(false);
@@ -63,20 +71,34 @@ function Posts({ data }) {
           </CardHeader>
           <Flex flex="1" gap="4" justifyContent="space-between">
             <CardBody padding="0 0 0.5rem 0">
-              <Heading as="h1" size="sm" fontWeight="medium">
-                {data.title}
-              </Heading>
+              <Link
+                state={{ permalink: data.permalink }}
+                to={`/r/${data.subreddit}/comments/${data.name}/${extractTitle(
+                  data.permalink
+                )}`}
+              >
+                <Heading as="h1" size="sm" fontWeight="medium">
+                  {data.title}
+                </Heading>
+              </Link>
               {data.post_hint !== "link" ? (
-                <Box padding="0.6rem 0 0 0">
-                  <Flex
-                    maxH="512px"
-                    w="100%"
-                    bg="whiteAlpha.100"
-                    justifyContent="center"
-                  >
-                    <MediaPost data={data} />
-                  </Flex>
-                </Box>
+                <Link
+                  state={{ permalink: data.permalink }}
+                  to={`/r/${data.subreddit}/comments/${
+                    data.name
+                  }/${extractTitle(data.permalink)}`}
+                >
+                  <Box padding="0.6rem 0 0 0">
+                    <Flex
+                      maxH="512px"
+                      w="100%"
+                      bg="whiteAlpha.100"
+                      justifyContent="center"
+                    >
+                      <MediaPost data={data} />
+                    </Flex>
+                  </Box>
+                </Link>
               ) : (
                 <Box maxH="512px" w="100%">
                   <MediaPost data={data} />
@@ -85,15 +107,34 @@ function Posts({ data }) {
             </CardBody>
           </Flex>
           <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">
-            <HStack>
-              <ChatIcon />
-              <Text fontWeight="bold" fontSize="0.8rem">
-                {data.num_comments > 1000
-                  ? formatNumber(data.num_comments)
-                  : data.num_comments}{" "}
-                Comments
-              </Text>
-            </HStack>
+            <Flex alignItems="center" gap={3}>
+              <Link
+                state={{ permalink: data.permalink }}
+                to={`/r/${data.subreddit}/comments/${data.name}/${extractTitle(
+                  data.permalink
+                )}`}
+              >
+                <HStack>
+                  <ChatIcon />
+                  <Text fontWeight="bold" fontSize="0.8rem">
+                    {data.num_comments > 1000
+                      ? formatNumber(data.num_comments)
+                      : data.num_comments}{" "}
+                    Comments
+                  </Text>
+                </HStack>
+              </Link>
+              <ChakraLink
+                display="flex"
+                alignItems="center"
+                onClick={handleShareClick}
+              >
+                <LinkIcon mr={1} />
+                <Text fontWeight="bold" fontSize="0.8rem">
+                  {copyLink ? "Copied" : "Share"}
+                </Text>
+              </ChakraLink>
+            </Flex>
           </CardFooter>
         </Flex>
         <Flex

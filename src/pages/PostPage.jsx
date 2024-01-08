@@ -3,13 +3,12 @@ import CurrentPost from "../components/CurrentPost";
 import { useLocation } from "react-router-dom";
 
 function PostPage() {
-  const location = useLocation();
-  const permalink = location.pathname;
+  const { pathname } = useLocation();
 
   return (
     <>
       <Navbar />
-      <CurrentPost permalink={permalink} />
+      <CurrentPost permalink={pathname} />
     </>
   );
 }
