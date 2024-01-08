@@ -1,48 +1,15 @@
-import { formatNumber } from "../utils/formatNumber";
-import {
-  ChatIcon,
-  LinkIcon,
-  TriangleDownIcon,
-  TriangleUpIcon,
-} from "@chakra-ui/icons";
-import {
-  Box,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Flex,
-  HStack,
-  Heading,
-  Text,
-  Link as ChakraLink,
-} from "@chakra-ui/react";
-import extractTitle from "../utils/extractTitle.js";
-
-import { useState } from "react";
-import MediaPost from "./MediaPost";
+import { Card, CardBody, CardFooter, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import extractTitle from "../utils/extractTitle.js";
+import HeadTitle from "./HeadTitle.jsx";
+import Title from "./Title.jsx";
+import Content from "./Content.jsx";
+import Vote from "./Vote.jsx";
+import Comment from "./Comment.jsx";
+import Share from "./Share.jsx";
+
 function Posts({ data }) {
-  const [upvote, setUpvote] = useState(false);
-  const [downvote, setDownvote] = useState(false);
-  const [copyLink, setCopyLink] = useState(false);
-
-  const handleUpvote = () => {
-    setUpvote(!upvote);
-    setDownvote(false); // Reset downvote state
-  };
-
-  const handleDownvote = () => {
-    setDownvote(!downvote);
-    setUpvote(false); // Reset upvote state
-  };
-
-  const handleShareClick = () => {
-    navigator.clipboard.writeText(`https://www.reddit.com${data.permalink}`);
-    setCopyLink(true);
-  };
-
   return (
     <Card
       maxW="2xl"
@@ -61,49 +28,19 @@ function Posts({ data }) {
         justifyContent="flex-end"
       >
         <Flex flexDirection="column" w="100%">
-          <CardHeader py={3} px={1}>
-            <Heading as="h1" fontSize="0.9rem">
-              {data.subreddit_name_prefixed}{" "}
-              <Text as="span" fontWeight="normal" fontSize="0.8rem">
-                • Posted by u/{data.author}
-              </Text>
-            </Heading>
-          </CardHeader>
+          <HeadTitle
+            subreddit_name_prefixed={data.subreddit_name_prefixed}
+            author={data.author}
+          />
           <Flex flex="1" gap="4" justifyContent="space-between">
             <CardBody padding="0 0 0.5rem 0">
-              <Link
-                state={{ permalink: data.permalink }}
-                to={`/r/${data.subreddit}/comments/${data.name}/${extractTitle(
-                  data.permalink
-                )}`}
-              >
-                <Heading as="h1" size="sm" fontWeight="medium">
-                  {data.title}
-                </Heading>
-              </Link>
-              {data.post_hint !== "link" ? (
-                <Link
-                  state={{ permalink: data.permalink }}
-                  to={`/r/${data.subreddit}/comments/${
-                    data.name
-                  }/${extractTitle(data.permalink)}`}
-                >
-                  <Box padding="0.6rem 0 0 0">
-                    <Flex
-                      maxH="512px"
-                      w="100%"
-                      bg="whiteAlpha.100"
-                      justifyContent="center"
-                    >
-                      <MediaPost data={data} />
-                    </Flex>
-                  </Box>
-                </Link>
-              ) : (
-                <Box maxH="512px" w="100%">
-                  <MediaPost data={data} />
-                </Box>
-              )}
+              <Title
+                permalink={data.permalink}
+                subreddit={data.subreddit}
+                name={data.name}
+                title={data.title}
+              />
+              <Content data={data} />
             </CardBody>
           </Flex>
           <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">
@@ -114,50 +51,13 @@ function Posts({ data }) {
                   data.permalink
                 )}`}
               >
-                <HStack>
-                  <ChatIcon />
-                  <Text fontWeight="bold" fontSize="0.8rem">
-                    {data.num_comments > 1000
-                      ? formatNumber(data.num_comments)
-                      : data.num_comments}{" "}
-                    Comments
-                  </Text>
-                </HStack>
+                <Comment num_comments={data.num_comments} />
               </Link>
-              <ChakraLink
-                display="flex"
-                alignItems="center"
-                onClick={handleShareClick}
-              >
-                <LinkIcon mr={1} />
-                <Text fontWeight="bold" fontSize="0.8rem">
-                  {copyLink ? "Copied" : "Share"}
-                </Text>
-              </ChakraLink>
+              <Share permalink={data.permalink} />
             </Flex>
           </CardFooter>
         </Flex>
-        <Flex
-          flexDirection="column"
-          alignItems="center"
-          p={{ base: "0.5", md: "0.8rem" }}
-        >
-          <TriangleUpIcon
-            color={upvote ? "red.400" : "gray.400"}
-            onClick={handleUpvote}
-          />
-          <Text
-            fontWeight="bold"
-            fontSize="0.8rem"
-            color={upvote ? "red.400" : downvote ? "blue.400" : "gray.400"}
-          >
-            {data.ups > 1000 ? formatNumber(data.ups) : data.ups}
-          </Text>
-          <TriangleDownIcon
-            color={downvote ? "blue.400" : "gray.400"}
-            onClick={handleDownvote}
-          />
-        </Flex>
+        <Vote ups={data.ups} />
       </Flex>
     </Card>
   );
