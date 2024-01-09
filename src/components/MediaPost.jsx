@@ -46,7 +46,14 @@ function MediaPost({ data }) {
     }
     // It will render plain text
     else {
-      return <Text>{data.selftext}</Text>;
+      const cleanedHtml = removeCommentsFromHTML(data.selftext_html);
+      return (
+        <Text
+          id="para"
+          p="5px 2rem 5px 0"
+          dangerouslySetInnerHTML={{ __html: cleanedHtml }}
+        ></Text>
+      );
     }
   }
 }

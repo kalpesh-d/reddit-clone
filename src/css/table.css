@@ -9,3 +9,7 @@ td {
   color: #63b3ed !important;
   text-decoration: underline;
 }
+
+#para * {
+  margin-top: 0.5rem;
+}
