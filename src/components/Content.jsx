@@ -6,7 +6,7 @@ import extractTitle from "../utils/extractTitle";
 function Content({ data }) {
   return (
     <>
-      {data.post_hint !== "link" ? (
+      {data.post_hint !== "link" && !data.selftext ? (
         <Link
           state={{ permalink: data.permalink }}
           to={`/r/${data.subreddit}/comments/${data.name}/${extractTitle(
