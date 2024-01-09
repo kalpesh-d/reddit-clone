@@ -9,12 +9,10 @@ import Title from "./Title";
 import Content from "./Content";
 
 function CurrentPost({ permalink }) {
-  const post = useSelector((state) => state.currentPost.currentPost);
   const currentPost = useSelector(
     (state) => state.currentPost.currentPost.posts.data?.children[0]?.data
   );
   const dispatch = useDispatch();
-  console.log(currentPost);
 
   useEffect(() => {
     dispatch(getCurrentPost(removeT3FromUrl(permalink)));

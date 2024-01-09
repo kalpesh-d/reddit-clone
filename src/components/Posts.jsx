@@ -39,6 +39,7 @@ function Posts({ data }) {
                 subreddit={data.subreddit}
                 name={data.name}
                 title={data.title}
+                link={true}
               />
               <Content data={data} />
             </CardBody>
