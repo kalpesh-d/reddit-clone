@@ -1,0 +1,11 @@
+table,
+th,
+td {
+  border: 1px solid;
+  padding: 3px 2rem;
+}
+
+#table a {
+  color: #63b3ed !important;
+  text-decoration: underline;
+}
