@@ -2,8 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentPost } from "../feature/currentPost/currentPostSlice";
 import removeT3FromUrl from "../utils/removeT3FromUrl";
-import { Card, Flex, Spinner, Stack } from "@chakra-ui/react";
+import { Card, CardBody, Flex, Spinner, Stack } from "@chakra-ui/react";
 import HeadTitle from "./HeadTitle";
+import Vote from "./Vote";
+import Title from "./Title";
+import Content from "./Content";
 
 function CurrentPost({ permalink }) {
   const post = useSelector((state) => state.currentPost.currentPost);
@@ -12,7 +15,6 @@ function CurrentPost({ permalink }) {
   );
   const dispatch = useDispatch();
   console.log(currentPost);
-  console.log(post);
 
   useEffect(() => {
     dispatch(getCurrentPost(removeT3FromUrl(permalink)));
@@ -53,7 +55,19 @@ function CurrentPost({ permalink }) {
             subreddit_name_prefixed={currentPost.subreddit_name_prefixed}
             author={currentPost.author}
           />
+          <Flex flex="1" gap="4" justifyContent="space-between">
+            <CardBody padding="0 0 0.5rem 0">
+              <Title
+                permalink={currentPost.permalink}
+                subreddit={currentPost.subreddit}
+                name={currentPost.name}
+                title={currentPost.title}
+              />
+              <Content data={currentPost} />
+            </CardBody>
+          </Flex>
         </Flex>
+        <Vote ups={currentPost.ups} />
       </Flex>
     </Card>
   );

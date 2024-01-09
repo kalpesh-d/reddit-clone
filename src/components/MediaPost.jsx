@@ -1,8 +1,9 @@
-import { Image, Link } from "@chakra-ui/react";
+import { Box, Image, Link, Text } from "@chakra-ui/react";
 import { shortenLink } from "../utils/shortenLink";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import React from "react";
 import ReactPlayer from "react-player";
+import removeCommentsFromHTML from "../utils/removeCommentsFromHTML";
 
 function MediaPost({ data }) {
   if (data.post_hint === "image") {
@@ -23,6 +24,9 @@ function MediaPost({ data }) {
         />
       </>
     );
+  } else if (data.selftext) {
+    const cleanedHtml = removeCommentsFromHTML(data.selftext_html);
+    return <Box p={4} dangerouslySetInnerHTML={{ __html: cleanedHtml }}></Box>;
   }
 }
 
