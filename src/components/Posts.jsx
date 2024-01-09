@@ -41,7 +41,7 @@ function Posts({ data }) {
                 title={data.title}
                 link={true}
               />
-              <Content data={data} />
+              <Content data={data} height="312px" />
             </CardBody>
           </Flex>
           <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">

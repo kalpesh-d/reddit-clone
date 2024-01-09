@@ -3,7 +3,7 @@ import MediaPost from "./MediaPost";
 import { Link } from "react-router-dom";
 import extractTitle from "../utils/extractTitle";
 
-function Content({ data }) {
+function Content({ data, height }) {
   return (
     <>
       {data.post_hint !== "link" && !data.selftext ? (
@@ -15,7 +15,7 @@ function Content({ data }) {
         >
           <Box padding="0.6rem 0 0 0">
             <Flex
-              maxH="512px"
+              maxH={height}
               w="100%"
               bg="whiteAlpha.100"
               justifyContent="center"
@@ -25,7 +25,7 @@ function Content({ data }) {
           </Box>
         </Link>
       ) : (
-        <Box maxH="512px" w="100%">
+        <Box maxH={height} w="100%">
           <MediaPost data={data} />
         </Box>
       )}

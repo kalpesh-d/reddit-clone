@@ -36,13 +36,7 @@ function CurrentPost({ permalink }) {
   }
 
   return (
-    <Card
-      maxW="2xl"
-      h="auto"
-      border="1px"
-      borderColor="gray.600"
-      margin="0 auto"
-    >
+    <Card maxW="2xl" border="1px" borderColor="gray.600" margin="0 auto">
       <Flex
         flexDirection="row-reverse"
         alignItems="flex-start"
@@ -61,7 +55,7 @@ function CurrentPost({ permalink }) {
                 name={currentPost.name}
                 title={currentPost.title}
               />
-              <Content data={currentPost} />
+              <Content data={currentPost} height="100%" />
             </CardBody>
           </Flex>
         </Flex>
