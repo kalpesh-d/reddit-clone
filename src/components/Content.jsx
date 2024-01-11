@@ -6,7 +6,7 @@ import extractTitle from "../utils/extractTitle";
 function Content({ data, height }) {
   return (
     <>
-      {data.post_hint !== "link" && !data.selftext ? (
+      {data.post_hint === "image" || data.post_hint === "hosted:video" ? (
         <Link
           state={{ permalink: data.permalink }}
           to={`/r/${data.subreddit}/comments/${data.name}/${extractTitle(
@@ -19,13 +19,14 @@ function Content({ data, height }) {
               w="100%"
               bg="whiteAlpha.100"
               justifyContent="center"
+              overflow="hidden"
             >
               <MediaPost data={data} />
             </Flex>
           </Box>
         </Link>
       ) : (
-        <Box maxH={height} w="100%">
+        <Box maxH={height} w="100%" overflow="hidden">
           <MediaPost data={data} />
         </Box>
       )}

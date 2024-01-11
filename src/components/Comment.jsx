@@ -4,7 +4,7 @@ import { ChatIcon } from "@chakra-ui/icons";
 
 function Comment({ num_comments }) {
   return (
-    <HStack>
+    <HStack height="1.5rem">
       <ChatIcon />
       <Text fontWeight="bold" fontSize="0.8rem">
         {num_comments > 1000 ? formatNumber(num_comments) : num_comments}{" "}

@@ -10,6 +10,7 @@ import Comment from "./Comment.jsx";
 import Share from "./Share.jsx";
 
 function Posts({ data }) {
+  console.log(data);
   return (
     <Card
       maxW="2xl"
@@ -41,7 +42,7 @@ function Posts({ data }) {
                 title={data.title}
                 link={true}
               />
-              <Content data={data} height="312px" />
+              <Content data={data} height="412px" />
             </CardBody>
           </Flex>
           <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">

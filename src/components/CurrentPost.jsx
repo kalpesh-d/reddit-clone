@@ -2,16 +2,26 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentPost } from "../feature/currentPost/currentPostSlice";
 import removeT3FromUrl from "../utils/removeT3FromUrl";
-import { Card, CardBody, Flex, Spinner, Stack } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Flex,
+  Spinner,
+  Stack,
+} from "@chakra-ui/react";
 import HeadTitle from "./HeadTitle";
 import Vote from "./Vote";
 import Title from "./Title";
 import Content from "./Content";
+import Comment from "./Comment";
+import Share from "./Share";
 
 function CurrentPost({ permalink }) {
   const currentPost = useSelector(
     (state) => state.currentPost.currentPost.posts.data?.children[0]?.data
   );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,6 +68,12 @@ function CurrentPost({ permalink }) {
               <Content data={currentPost} height="100%" />
             </CardBody>
           </Flex>
+          <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">
+            <Flex alignItems="center" gap={3}>
+              <Comment num_comments={currentPost.num_comments} />
+              <Share permalink={currentPost.permalink} />
+            </Flex>
+          </CardFooter>
         </Flex>
         <Vote ups={currentPost.ups} />
       </Flex>
