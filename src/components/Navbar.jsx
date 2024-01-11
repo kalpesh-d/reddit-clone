@@ -1,26 +1,24 @@
-import {
-  HStack,
-  Image,
-  Input,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
+import { HStack, Image } from "@chakra-ui/react";
 import Logo from "../assets/Reddit_Lockup_OnDark.svg";
-import { SearchIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <HStack justifyContent="space-between" px="25px">
+    <HStack
+      justifyContent="center"
+      px="25px"
+      bg="gray.700"
+      marginBottom="0.6rem"
+    >
       <Link to="/">
-        <Image src={Logo} alt="Reddit logo" boxSize="6.5rem" />
+        <Image
+          src={Logo}
+          alt="Reddit logo"
+          boxSize="6rem"
+          margin="1rem"
+          height
+        />
       </Link>
-      <InputGroup>
-        <Input placeholder="extra small size" />
-        <InputRightElement pointerEvents="none">
-          <SearchIcon color="gray.300" />
-        </InputRightElement>
-      </InputGroup>
     </HStack>
   );
 }
