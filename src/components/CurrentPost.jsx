@@ -21,6 +21,7 @@ function CurrentPost({ permalink }) {
   const currentPost = useSelector(
     (state) => state.currentPost.currentPost.posts.data?.children[0]?.data
   );
+  const isLoading = useSelector((state) => state.currentPost.isLoading);
 
   const dispatch = useDispatch();
 
@@ -28,7 +29,7 @@ function CurrentPost({ permalink }) {
     dispatch(getCurrentPost(removeT3FromUrl(permalink)));
   }, [dispatch, permalink]);
 
-  if (!currentPost) {
+  if (isLoading) {
     return (
       <Stack
         direction="row"
@@ -43,42 +44,41 @@ function CurrentPost({ permalink }) {
         <span>Loading...</span>
       </Stack>
     );
-  }
-
-  return (
-    <Card maxW="2xl" border="1px" borderColor="gray.600" margin="0 auto">
-      <Flex
-        flexDirection="row-reverse"
-        alignItems="flex-start"
-        justifyContent="flex-end"
-      >
-        <Flex flexDirection="column" w="100%">
-          <HeadTitle
-            subreddit_name_prefixed={currentPost.subreddit_name_prefixed}
-            author={currentPost.author}
-          />
-          <Flex flex="1" gap="4" justifyContent="space-between">
-            <CardBody padding="0 0 0.5rem 0">
-              <Title
-                permalink={currentPost.permalink}
-                subreddit={currentPost.subreddit}
-                name={currentPost.name}
-                title={currentPost.title}
-              />
-              <Content data={currentPost} height="100%" />
-            </CardBody>
-          </Flex>
-          <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">
-            <Flex alignItems="center" gap={3}>
-              <Comment num_comments={currentPost.num_comments} />
-              <Share permalink={currentPost.permalink} />
+  } else {
+    return (
+      <Card maxW="2xl" border="1px" borderColor="gray.600" margin="0 auto">
+        <Flex
+          flexDirection="row-reverse"
+          alignItems="flex-start"
+          justifyContent="flex-end"
+        >
+          <Flex flexDirection="column" w="100%">
+            <HeadTitle
+              subreddit_name_prefixed={currentPost.subreddit_name_prefixed}
+              author={currentPost.author}
+            />
+            <Flex flex="1" gap="4" justifyContent="space-between">
+              <CardBody padding="0 0 0.5rem 0">
+                <Title
+                  permalink={currentPost.permalink}
+                  subreddit={currentPost.subreddit}
+                  name={currentPost.name}
+                  title={currentPost.title}
+                />
+                <Content data={currentPost} height="100%" />
+              </CardBody>
             </Flex>
-          </CardFooter>
+            <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">
+              <Flex alignItems="center" gap={3}>
+                <Comment num_comments={currentPost.num_comments} />
+                <Share permalink={currentPost.permalink} />
+              </Flex>
+            </CardFooter>
+          </Flex>
+          <Vote ups={currentPost.ups} />
         </Flex>
-        <Vote ups={currentPost.ups} />
-      </Flex>
-    </Card>
-  );
+      </Card>
+    );
+  }
 }
-
 export default CurrentPost;

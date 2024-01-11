@@ -1,37 +1,31 @@
-import { Box, Image, Link, Text } from "@chakra-ui/react";
+import { Box, Link, Text } from "@chakra-ui/react";
 import { shortenLink } from "../utils/shortenLink";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import React from "react";
-import ReactPlayer from "react-player";
 import removeCommentsFromHTML from "../utils/removeCommentsFromHTML";
 import isMarkdown from "../utils/isMarkdown";
 import "../css/table.css";
 
-function MediaPost({ data }) {
-  // It will render image
-  if (data.post_hint === "image") {
-    return <Image src={data.url} maxH="inherit" objectFit="cover" />;
-  }
-  // It will render link
-  else if (data.post_hint === "link") {
+function TextPost({ data }) {
+  if (data.post_hint === "link") {
+    const isTrue = isMarkdown(data.selftext);
     return (
-      <Link href={data.url} isExternal fontSize="0.8rem" color="blue.400">
-        {shortenLink(data.url)} <ExternalLinkIcon />
-      </Link>
+      <>
+        <Link href={data.url} isExternal fontSize="0.8rem" color="blue.400">
+          {shortenLink(data.url)} <ExternalLinkIcon />
+        </Link>
+        {isTrue && (
+          <Box
+            id="table"
+            py={4}
+            dangerouslySetInnerHTML={{ __html: cleanedHtml }}
+          ></Box>
+        )}
+      </>
     );
   }
   // It will render video
-  else if (data.post_hint === "hosted:video") {
-    return (
-      <>
-        <ReactPlayer
-          url={data.secure_media.reddit_video.hls_url}
-          width="100%"
-          controls={true}
-        />
-      </>
-    );
-  } else if (data.selftext) {
+  else if (data.selftext) {
     const isTrue = isMarkdown(data.selftext);
     // It will render markdown text
     if (isTrue) {
@@ -58,4 +52,4 @@ function MediaPost({ data }) {
   }
 }
 
-export default MediaPost;
+export default TextPost;

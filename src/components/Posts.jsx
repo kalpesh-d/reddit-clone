@@ -10,7 +10,6 @@ import Comment from "./Comment.jsx";
 import Share from "./Share.jsx";
 
 function Posts({ data }) {
-  console.log(data);
   return (
     <Card
       maxW="2xl"

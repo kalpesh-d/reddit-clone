@@ -1,7 +1,8 @@
 import { Box, Flex } from "@chakra-ui/react";
-import MediaPost from "./MediaPost";
+import TextPost from "./TextPost";
 import { Link } from "react-router-dom";
 import extractTitle from "../utils/extractTitle";
+import Media from "./Media";
 
 function Content({ data, height }) {
   return (
@@ -21,13 +22,14 @@ function Content({ data, height }) {
               justifyContent="center"
               overflow="hidden"
             >
-              <MediaPost data={data} />
+              <Media data={data} />
             </Flex>
+            <TextPost data={data} />
           </Box>
         </Link>
       ) : (
         <Box maxH={height} w="100%" overflow="hidden">
-          <MediaPost data={data} />
+          <TextPost data={data} />
         </Box>
       )}
     </>
