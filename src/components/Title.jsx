@@ -8,12 +8,12 @@ function Title({ permalink, subreddit, name, title, link }) {
       state={{ permalink: permalink }}
       to={`/r/${subreddit}/comments/${name}/${extractTitle(permalink)}`}
     >
-      <Heading as="h1" size="sm" fontWeight="medium">
+      <Heading as="h1" size="sm" fontWeight="bold">
         {title}
       </Heading>
     </Link>
   ) : (
-    <Heading as="h1" size="sm" fontWeight="medium">
+    <Heading as="h1" size="sm" fontWeight="bold">
       {title}
     </Heading>
   );
