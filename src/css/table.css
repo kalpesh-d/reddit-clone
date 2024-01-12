@@ -5,7 +5,8 @@ td {
   padding: 3px 2rem;
 }
 
-#table a {
+#table a,
+#para a {
   color: #63b3ed !important;
   text-decoration: underline;
 }
