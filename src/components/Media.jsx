@@ -1,5 +1,7 @@
 import { Image } from "@chakra-ui/react";
 import ReactPlayer from "react-player";
+import removeAmpFromURL from "../utils/removeAmpFromURL";
+import Carousel from "./Carousal";
 
 function Media({ data }) {
   if (data.post_hint === "image") {
@@ -12,6 +14,18 @@ function Media({ data }) {
         controls={true}
       />
     );
+  } else if (data.is_gallery) {
+    const galleryImages = Object.values(data.media_metadata).map((image) =>
+      removeAmpFromURL(image.s.u)
+    );
+
+    return <Carousel images={galleryImages} />;
+
+    // {
+    //   return Object.values(data.media_metadata).map((image) => (
+    //     <Image src={removeAmpFromURL(image.s.u)} key={image.id} />
+    //   ));
+    // }
   }
 }
 

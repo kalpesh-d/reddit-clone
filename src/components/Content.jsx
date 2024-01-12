@@ -7,7 +7,9 @@ import Media from "./Media";
 function Content({ data, height }) {
   return (
     <>
-      {data.post_hint === "image" || data.post_hint === "hosted:video" ? (
+      {data.post_hint === "image" ||
+      data.post_hint === "hosted:video" ||
+      data.is_gallery ? (
         <Link
           state={{ permalink: data.permalink }}
           to={`/r/${data.subreddit}/comments/${data.name}/${extractTitle(
