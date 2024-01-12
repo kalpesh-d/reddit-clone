@@ -70,7 +70,7 @@ function CurrentPost({ permalink }) {
                 name={currentPost.name}
                 title={currentPost.title}
               />
-              <Content data={currentPost} height="100%" />
+              <Content data={currentPost} height="30rem" />
             </CardBody>
           </Flex>
           <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">

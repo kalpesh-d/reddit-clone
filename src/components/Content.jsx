@@ -14,7 +14,7 @@ function Content({ data, height }) {
             data.permalink
           )}`}
         >
-          <Box padding="0.6rem 0 0 0">
+          <Box padding="0.6rem 0 0 0" maxH={height} overflow="hidden">
             <Flex
               maxH={height}
               w="100%"
