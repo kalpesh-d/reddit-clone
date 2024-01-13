@@ -6,8 +6,8 @@ import HeadTitle from "./HeadTitle.jsx";
 import Title from "./Title.jsx";
 import Content from "./Content.jsx";
 import Vote from "./Vote.jsx";
-import Comment from "./Comment.jsx";
 import Share from "./Share.jsx";
+import CommentIcon from "./CommentIcon.jsx";
 
 function Posts({ data }) {
   return (
@@ -52,7 +52,7 @@ function Posts({ data }) {
                   data.permalink
                 )}`}
               >
-                <Comment num_comments={data.num_comments} />
+                <CommentIcon num_comments={data.num_comments} />
               </Link>
               <Share permalink={data.permalink} />
             </Flex>

@@ -2,7 +2,7 @@ import { HStack, Text } from "@chakra-ui/react";
 import { formatNumber } from "../utils/formatNumber";
 import { ChatIcon } from "@chakra-ui/icons";
 
-function Comment({ num_comments }) {
+function CommentIcon({ num_comments }) {
   return (
     <HStack height="1.5rem">
       <ChatIcon />
@@ -14,4 +14,4 @@ function Comment({ num_comments }) {
   );
 }
 
-export default Comment;
+export default CommentIcon;

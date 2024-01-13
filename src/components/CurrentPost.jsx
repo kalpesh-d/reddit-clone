@@ -14,7 +14,7 @@ import HeadTitle from "./HeadTitle";
 import Vote from "./Vote";
 import Title from "./Title";
 import Content from "./Content";
-import Comment from "./Comment";
+import CommentIcon from "./CommentIcon";
 import Share from "./Share";
 
 function CurrentPost({ permalink }) {
@@ -75,7 +75,7 @@ function CurrentPost({ permalink }) {
           </Flex>
           <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">
             <Flex alignItems="center" gap={3}>
-              <Comment num_comments={currentPost.num_comments} />
+              <CommentIcon num_comments={currentPost.num_comments} />
               <Share permalink={currentPost.permalink} />
             </Flex>
           </CardFooter>
