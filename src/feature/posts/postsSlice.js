@@ -6,7 +6,6 @@ const initialState = {
   postsByCategory: {
     best: [],
     hot: [],
-    new: [],
     top: [],
     rising: [],
   },

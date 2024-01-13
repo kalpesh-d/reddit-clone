@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPostsForCategory } from "../feature/posts/postsSlice";
 import titleCase from "../utils/titleCase";
 
-const categories = ["Best", "Hot", "New", "Top", "Rising"];
+const categories = ["Best", "Hot", "Top", "Rising"];
 
 function Catergory() {
   const category = useSelector((state) => state.posts.selectedCategory);
