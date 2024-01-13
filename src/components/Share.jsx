@@ -2,7 +2,7 @@ import { LinkIcon } from "@chakra-ui/icons";
 import { Link, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
-function Share({ permalink }) {
+function Share({ permalink, color = "white" }) {
   const [copyLink, setCopyLink] = useState(false);
 
   const handleShareClick = () => {
@@ -11,7 +11,12 @@ function Share({ permalink }) {
   };
 
   return (
-    <Link display="flex" alignItems="center" onClick={handleShareClick}>
+    <Link
+      display="flex"
+      alignItems="center"
+      color={color}
+      onClick={handleShareClick}
+    >
       <LinkIcon mr={1} />
       <Text fontWeight="bold" fontSize="0.8rem">
         {copyLink ? "Copied" : "Share"}

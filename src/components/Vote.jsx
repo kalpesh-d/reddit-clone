@@ -3,7 +3,12 @@ import { Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { formatNumber } from "../utils/formatNumber";
 
-function Vote({ ups }) {
+function Vote({
+  ups,
+  direction = "column",
+  gap = 0,
+  p = { base: "0.5", md: "0.8rem" },
+}) {
   const [upvote, setUpvote] = useState(false);
   const [downvote, setDownvote] = useState(false);
 
@@ -17,11 +22,7 @@ function Vote({ ups }) {
     setUpvote(false); // Reset upvote state
   };
   return (
-    <Flex
-      flexDirection="column"
-      alignItems="center"
-      p={{ base: "0.5", md: "0.8rem" }}
-    >
+    <Flex flexDirection={direction} alignItems="center" gap={gap} p={p}>
       <TriangleUpIcon
         color={upvote ? "red.400" : "gray.400"}
         onClick={handleUpvote}

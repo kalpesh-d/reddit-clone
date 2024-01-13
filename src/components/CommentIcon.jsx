@@ -2,9 +2,9 @@ import { HStack, Text } from "@chakra-ui/react";
 import { formatNumber } from "../utils/formatNumber";
 import { ChatIcon } from "@chakra-ui/icons";
 
-function CommentIcon({ num_comments }) {
+function CommentIcon({ num_comments, color = "white" }) {
   return (
-    <HStack height="1.5rem">
+    <HStack height="1.5rem" color={color}>
       <ChatIcon />
       <Text fontWeight="bold" fontSize="0.8rem">
         {num_comments > 1000 ? formatNumber(num_comments) : num_comments}{" "}
