@@ -21,7 +21,12 @@ export const getCurrentPost = createAsyncThunk(
 const currentPostSlice = createSlice({
   name: "currentPost",
   initialState,
-  reducers: {},
+  reducers: {
+    addComment: (state, action) => {
+      const comment = { kind: "tl", data: action.payload };
+      state.currentPost.comments.data.children.push(comment);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCurrentPost.pending, (state) => {
@@ -40,3 +45,4 @@ const currentPostSlice = createSlice({
 });
 
 export default currentPostSlice.reducer;
+export const { addComment } = currentPostSlice.actions;

@@ -1,15 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentPost } from "../feature/currentPost/currentPostSlice";
+import {
+  addComment,
+  getCurrentPost,
+} from "../feature/currentPost/currentPostSlice";
 import removeT3FromUrl from "../utils/removeT3FromUrl";
 import {
   Box,
+  Button,
   Card,
   CardBody,
   CardFooter,
   Flex,
   Spinner,
   Stack,
+  Textarea,
 } from "@chakra-ui/react";
 import HeadTitle from "./HeadTitle";
 import Vote from "./Vote";
@@ -27,8 +32,29 @@ function CurrentPost({ permalink }) {
     (state) => state.currentPost.currentPost.comments?.data?.children
   );
   const isLoading = useSelector((state) => state.currentPost.isLoading);
+  const [newComment, setNewComment] = useState("");
 
   const dispatch = useDispatch();
+
+  const handleCommentChange = (e) => {
+    e.preventDefault();
+    setNewComment(e.target.value);
+  };
+
+  const handleCommentSubmit = () => {
+    const randomId = Math.random().toString(36).substring(2, 9);
+    const comment = `&lt;div class="md"&gt;&lt;p&gt;${newComment}&lt;/p&gt; &lt;/div&gt;`;
+
+    dispatch(
+      addComment({
+        id: randomId,
+        body_html: comment,
+        author: "noobmaster",
+        ups: 1,
+      })
+    );
+    setNewComment("");
+  };
 
   useEffect(() => {
     dispatch(getCurrentPost(removeT3FromUrl(permalink)));
@@ -89,6 +115,7 @@ function CurrentPost({ permalink }) {
           <Vote ups={currentPost.ups} />
         </Flex>
       </Card>
+
       <Flex justifyContent="center" mt="5">
         <Box
           maxW="2xl"
@@ -97,6 +124,16 @@ function CurrentPost({ permalink }) {
           bg="gray.700"
           borderRadius={5}
         >
+          <Box mb={5}>
+            <Textarea
+              placeholder="Add a comment..."
+              value={newComment}
+              onChange={handleCommentChange}
+            />
+            <Button onClick={handleCommentSubmit} h={10}>
+              Comment
+            </Button>
+          </Box>
           <CommentList comments={currentComment} />
         </Box>
       </Flex>
