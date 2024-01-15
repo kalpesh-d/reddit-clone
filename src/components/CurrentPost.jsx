@@ -105,38 +105,54 @@ function CurrentPost({ permalink }) {
                 <Content data={currentPost} height="30rem" />
               </CardBody>
             </Flex>
-            <CardFooter p="0 0 0.5rem 0.5rem" color="gray.400">
+            <CardFooter p="0.5rem 0 0.5rem 0">
               <Flex alignItems="center" gap={3}>
-                <CommentIcon num_comments={currentPost.num_comments} />
-                <Share permalink={currentPost.permalink} />
+                <Button size="xs" bg="transparent">
+                  <label htmlFor="comment">
+                    <CommentIcon num_comments={currentPost.num_comments} />
+                  </label>
+                </Button>
+                <Button size="xs" bg="transparent">
+                  <Share permalink={currentPost.permalink} />
+                </Button>
               </Flex>
             </CardFooter>
           </Flex>
           <Vote ups={currentPost.ups} />
         </Flex>
-      </Card>
-
-      <Flex justifyContent="center" mt="5">
         <Box
           maxW="2xl"
           border="1px"
           borderColor="gray.600"
           bg="gray.700"
           borderRadius={5}
+          mt="5"
         >
           <Box mb={5}>
-            <Textarea
-              placeholder="Add a comment..."
-              value={newComment}
-              onChange={handleCommentChange}
-            />
-            <Button onClick={handleCommentSubmit} h={10}>
-              Comment
-            </Button>
+            <Flex justifyContent="center" flexDirection="column">
+              <Textarea
+                id="comment"
+                maxW={{
+                  base: "md",
+                  lg: "2xl",
+                }}
+                placeholder="Add a comment..."
+                value={newComment}
+                onChange={handleCommentChange}
+              />
+              <Button onClick={handleCommentSubmit} h={10}>
+                Comment
+              </Button>
+            </Flex>
           </Box>
-          <CommentList comments={currentComment} />
+          <CommentList
+            comments={currentComment}
+            newComment={newComment}
+            handleCommentChange={handleCommentChange}
+            handleCommentSubmit={handleCommentSubmit}
+          />
         </Box>
-      </Flex>
+      </Card>
     </>
   );
 }

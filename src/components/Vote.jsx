@@ -1,5 +1,5 @@
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { formatNumber } from "../utils/formatNumber";
 
@@ -23,10 +23,12 @@ function Vote({
   };
   return (
     <Flex flexDirection={direction} alignItems="center" gap={gap} p={p}>
-      <TriangleUpIcon
-        color={upvote ? "red.400" : "gray.400"}
-        onClick={handleUpvote}
-      />
+      <Button size="xs" bg="transparent">
+        <TriangleUpIcon
+          color={upvote ? "red.400" : "gray.400"}
+          onClick={handleUpvote}
+        />
+      </Button>
       <Text
         fontWeight="bold"
         fontSize="0.8rem"
@@ -34,10 +36,12 @@ function Vote({
       >
         {ups > 1000 ? formatNumber(ups) : ups}
       </Text>
-      <TriangleDownIcon
-        color={downvote ? "blue.400" : "gray.400"}
-        onClick={handleDownvote}
-      />
+      <Button size="xs" bg="transparent">
+        <TriangleDownIcon
+          color={downvote ? "blue.400" : "gray.400"}
+          onClick={handleDownvote}
+        />
+      </Button>
     </Flex>
   );
 }

@@ -2,7 +2,7 @@ import { HStack, Text } from "@chakra-ui/react";
 import { formatNumber } from "../utils/formatNumber";
 import { ChatIcon } from "@chakra-ui/icons";
 
-function CommentIcon({ num_comments, color = "white" }) {
+function CommentIcon({ num_comments, color = "gray.300" }) {
   return (
     <HStack height="1.5rem" color={color}>
       <ChatIcon />
