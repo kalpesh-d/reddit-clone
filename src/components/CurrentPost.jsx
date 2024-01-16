@@ -14,7 +14,6 @@ import {
   Flex,
   Spinner,
   Stack,
-  Textarea,
 } from "@chakra-ui/react";
 import HeadTitle from "./HeadTitle";
 import Vote from "./Vote";
@@ -23,6 +22,7 @@ import Content from "./Content";
 import CommentIcon from "./CommentIcon";
 import Share from "./Share";
 import CommentList from "./CommentList";
+import TextArea from "./TextArea";
 
 function CurrentPost({ permalink }) {
   const currentPost = useSelector(
@@ -129,21 +129,11 @@ function CurrentPost({ permalink }) {
           mt="5"
         >
           <Box mb={5}>
-            <Flex justifyContent="center" flexDirection="column">
-              <Textarea
-                id="comment"
-                maxW={{
-                  base: "md",
-                  lg: "2xl",
-                }}
-                placeholder="Add a comment..."
-                value={newComment}
-                onChange={handleCommentChange}
-              />
-              <Button onClick={handleCommentSubmit} h={10}>
-                Comment
-              </Button>
-            </Flex>
+            <TextArea
+              newComment={newComment}
+              handleCommentChange={handleCommentChange}
+              handleCommentSubmit={handleCommentSubmit}
+            />
           </Box>
           <CommentList
             comments={currentComment}

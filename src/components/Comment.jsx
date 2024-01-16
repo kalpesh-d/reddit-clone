@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Text, Flex, Textarea, Button } from "@chakra-ui/react";
+import { Text, Flex, Button } from "@chakra-ui/react";
 import removeCommentsFromHTML from "../utils/removeCommentsFromHTML";
 import getTimeAgo from "../utils/getTimeAgo";
 import CommentList from "./CommentList";
 import CommentIcon from "./CommentIcon";
 import Share from "./Share";
 import Vote from "./Vote";
+import TextArea from "./TextArea";
 
 function Comment({
   comment,
@@ -49,21 +50,11 @@ function Comment({
         </Flex>
 
         {isTextArea && (
-          <Flex justifyContent="center" flexDirection="column">
-            <Textarea
-              id="comment"
-              maxW={{
-                base: "md",
-                lg: "2xl",
-              }}
-              placeholder="Add a comment..."
-              value={newComment}
-              onChange={handleCommentChange}
-            />
-            <Button onClick={handleCommentSubmit} h={10}>
-              Comment
-            </Button>
-          </Flex>
+          <TextArea
+            newComment={newComment}
+            handleCommentChange={handleCommentChange}
+            handleCommentSubmit={handleCommentSubmit}
+          />
         )}
         {isReply && (
           <CommentList comments={comment.data.replies.data.children} />

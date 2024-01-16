@@ -15,3 +15,13 @@ td {
   /* margin-top: 0.5rem; */
   line-height: normal;
 }
+
+pre {
+  max-width: inherit;
+  height: 100%;
+  overflow: scroll;
+}
+
+code {
+  width: 100% !important;
+}
