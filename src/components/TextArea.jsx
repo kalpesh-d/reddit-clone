@@ -23,9 +23,9 @@ function TextArea({ setIsTextArea, parent_id }) {
         })
       );
       setNewComment("");
-      setIsTextArea(false);
+      setIsTextArea && setIsTextArea(false);
     } else {
-      setIsTextArea(false);
+      setIsTextArea && setIsTextArea(false);
       alert("Cannot add empty comment!");
     }
   };

@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addComment,
-  getCurrentPost,
-} from "../feature/currentPost/currentPostSlice";
+import { getCurrentPost } from "../feature/currentPost/currentPostSlice";
 import removeT3FromUrl from "../utils/removeT3FromUrl";
 import {
   Box,

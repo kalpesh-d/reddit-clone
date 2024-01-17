@@ -19,7 +19,12 @@ function Comment({ comment }) {
 
   if (comment.kind !== "more")
     return (
-      <Flex p="0.6rem 1.3rem" flexDirection="column" justifyContent="center">
+      <Flex
+        p="0.6rem 1.3rem"
+        flexDirection="column"
+        justifyContent="center"
+        bg="gray.700"
+      >
         <Text fontWeight="medium" fontSize="0.8rem">
           {comment.data.author}{" "}
           <Text as="span" color="gray.200" fontWeight="normal">
