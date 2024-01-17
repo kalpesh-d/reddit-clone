@@ -8,14 +8,8 @@ import Share from "./Share";
 import Vote from "./Vote";
 import TextArea from "./TextArea";
 
-function Comment({
-  comment,
-  newComment,
-  handleCommentChange,
-  handleCommentSubmit,
-}) {
+function Comment({ comment }) {
   const [isTextArea, setIsTextArea] = useState(false);
-
   const cleanedHtml = removeCommentsFromHTML(comment.data.body_html);
   const isReply = comment.data.replies && true;
 
@@ -25,7 +19,7 @@ function Comment({
 
   if (comment.kind !== "more")
     return (
-      <Flex m="0.8rem 1rem" flexDirection="column" justifyContent="center">
+      <Flex p="0.6rem 1.3rem" flexDirection="column" justifyContent="center">
         <Text fontWeight="medium" fontSize="0.8rem">
           {comment.data.author}{" "}
           <Text as="span" color="gray.200" fontWeight="normal">
@@ -49,13 +43,7 @@ function Comment({
           <Share permalink={comment.data.permalink} color="gray.400" />
         </Flex>
 
-        {isTextArea && (
-          <TextArea
-            newComment={newComment}
-            handleCommentChange={handleCommentChange}
-            handleCommentSubmit={handleCommentSubmit}
-          />
-        )}
+        {isTextArea && <TextArea setIsTextArea={setIsTextArea} />}
         {isReply && (
           <CommentList comments={comment.data.replies.data.children} />
         )}

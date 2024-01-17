@@ -32,29 +32,8 @@ function CurrentPost({ permalink }) {
     (state) => state.currentPost.currentPost.comments?.data?.children
   );
   const isLoading = useSelector((state) => state.currentPost.isLoading);
-  const [newComment, setNewComment] = useState("");
 
   const dispatch = useDispatch();
-
-  const handleCommentChange = (e) => {
-    e.preventDefault();
-    setNewComment(e.target.value);
-  };
-
-  const handleCommentSubmit = () => {
-    const randomId = Math.random().toString(36).substring(2, 9);
-    const comment = `&lt;div class="md"&gt;&lt;p&gt;${newComment}&lt;/p&gt; &lt;/div&gt;`;
-
-    dispatch(
-      addComment({
-        id: randomId,
-        body_html: comment,
-        author: "noobmaster",
-        ups: 1,
-      })
-    );
-    setNewComment("");
-  };
 
   useEffect(() => {
     dispatch(getCurrentPost(removeT3FromUrl(permalink)));
@@ -120,29 +99,21 @@ function CurrentPost({ permalink }) {
           </Flex>
           <Vote ups={currentPost.ups} />
         </Flex>
-        <Box
-          maxW="2xl"
-          border="1px"
-          borderColor="gray.600"
-          bg="gray.700"
-          borderRadius={5}
-          mt="5"
-        >
-          <Box mb={5}>
-            <TextArea
-              newComment={newComment}
-              handleCommentChange={handleCommentChange}
-              handleCommentSubmit={handleCommentSubmit}
-            />
-          </Box>
-          <CommentList
-            comments={currentComment}
-            newComment={newComment}
-            handleCommentChange={handleCommentChange}
-            handleCommentSubmit={handleCommentSubmit}
-          />
-        </Box>
       </Card>
+      <Box
+        maxW="2xl"
+        border="1px"
+        borderColor="gray.600"
+        // bg="gray.700"
+        borderRadius={5}
+        margin="0 auto"
+        mt="5"
+      >
+        <Box mb={5}>
+          <TextArea />
+        </Box>
+        <CommentList comments={currentComment} />
+      </Box>
     </>
   );
 }
