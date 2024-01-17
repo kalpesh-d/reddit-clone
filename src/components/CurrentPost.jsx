@@ -62,7 +62,13 @@ function CurrentPost({ permalink }) {
 
   return (
     <>
-      <Card maxW="2xl" border="1px" borderColor="gray.600" margin="0 auto">
+      <Card
+        maxW="2xl"
+        border="1px"
+        borderColor="gray.600"
+        padding={{ base: "0 0.5rem" }}
+        margin={{ base: "0 0.5rem", lg: "0 auto" }}
+      >
         <Flex
           flexDirection="row-reverse"
           alignItems="flex-start"
@@ -104,12 +110,12 @@ function CurrentPost({ permalink }) {
         maxW="2xl"
         border="1px"
         borderColor="gray.600"
-        // bg="gray.700"
         borderRadius={5}
-        margin="0 auto"
-        mt="5"
+        // mt="5"
+        padding={{ base: "0 0.5rem" }}
+        margin={{ base: "0.5rem 0.5rem", lg: "0.5rem auto" }}
       >
-        <Box mb={5}>
+        <Box m="0.5rem 0">
           <TextArea />
         </Box>
         <CommentList comments={currentComment} />

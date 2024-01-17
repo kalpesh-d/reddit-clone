@@ -43,7 +43,9 @@ function Comment({ comment }) {
           <Share permalink={comment.data.permalink} color="gray.400" />
         </Flex>
 
-        {isTextArea && <TextArea setIsTextArea={setIsTextArea} />}
+        {isTextArea && (
+          <TextArea setIsTextArea={setIsTextArea} parent_id={comment.data.id} />
+        )}
         {isReply && (
           <CommentList comments={comment.data.replies.data.children} />
         )}

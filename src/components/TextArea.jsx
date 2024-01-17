@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addComment } from "../feature/currentPost/currentPostSlice";
 
-function TextArea({ setIsTextArea }) {
+function TextArea({ setIsTextArea, parent_id }) {
   const [newComment, setNewComment] = useState("");
 
   const dispatch = useDispatch();
@@ -12,16 +12,22 @@ function TextArea({ setIsTextArea }) {
     const randomId = Math.random().toString(36).substring(2, 9);
     const comment = `&lt;div class="md"&gt;&lt;p&gt;${newComment}&lt;/p&gt; &lt;/div&gt;`;
 
-    dispatch(
-      addComment({
-        id: randomId,
-        body_html: comment,
-        author: "noobmaster",
-        ups: 1,
-      })
-    );
-    setIsTextArea(false);
-    setNewComment("");
+    if (newComment) {
+      dispatch(
+        addComment({
+          id: randomId,
+          body_html: comment,
+          author: "noobmaster",
+          ups: 1,
+          parent_id: parent_id,
+        })
+      );
+      setNewComment("");
+      setIsTextArea(false);
+    } else {
+      setIsTextArea(false);
+      alert("Cannot add empty comment!");
+    }
   };
 
   return (
@@ -36,7 +42,7 @@ function TextArea({ setIsTextArea }) {
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
       />
-      <Button onClick={handleCommentSubmit} h={10}>
+      <Button onClick={handleCommentSubmit} h={10} mt={2}>
         Comment
       </Button>
     </Flex>
