@@ -1,7 +1,10 @@
 function removeAmpFromURL(url) {
-  const cleanedURL = url.replace(/amp;/g, "");
+  if (url) {
+    const cleanedURL = url.replace(/amp;/g, "");
 
-  return cleanedURL;
+    return cleanedURL;
+  }
+  return url;
 }
 
 export default removeAmpFromURL;
