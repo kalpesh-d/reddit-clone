@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
-import "./index.css";
 import theme from "./theme.js";
 import { Provider } from "react-redux";
 import store from "./store.js";
